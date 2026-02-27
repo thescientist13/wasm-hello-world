@@ -1,0 +1,16 @@
+{
+  "name": "wasm-hello-world",
+  "version": "1.0.0",
+  "description": "Web Assembly 'Hello World' example.",
+  "author": "Owen Buckley <owen@thegreenhouse.io>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thescientist13/wasm-hello-world.git"
+  },
+  "scripts": {
+    "start": "live-server"
+  },
+  "dependencies": {
+    "live-server": "^1.2.2"
+  }
+}
