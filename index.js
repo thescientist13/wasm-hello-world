@@ -2,15 +2,23 @@
 // Which, export default's, an initialization function
 import init from "./pkg/wasm_hello_world.js";
 
-const runWasm = async () => {
-  // Instantiate our wasm module
-  const helloWorld = await init("./pkg/wasm_hello_world_bg.wasm");
+// Instantiate our wasm module
 
-  // Call the Add function export from wasm, save the result
-  const addResult = helloWorld.add(24, 24);
+async function getHelloWorldModule() {
+  return await init("./pkg/wasm_hello_world_bg.wasm");
+}
 
-  // Set the result onto the body
-  document.querySelector("#output").textContent = `Hello World! addResult: ${addResult}`;
-};
 
-runWasm();
+export { getHelloWorldModule };
+// const runWasm = async () => {
+//   // Instantiate our wasm module
+//   const helloWorld = await init("./pkg/wasm_hello_world_bg.wasm");
+
+//   // Call the Add function export from wasm, save the result
+//   const addResult = helloWorld.add(24, 24);
+
+//   // Set the result onto the body
+//   document.querySelector("#output").textContent = `Hello World! addResult: ${addResult}`;
+// };
+
+// runWasm();

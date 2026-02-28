@@ -3,10 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <title>WASM Hello World - Rust</title>
-    <script type="module" src="./index.js"></script>
+    <script type="module">
+      import { getHelloWorldModule } from './index.js';
+      let helloWorld;
+
+      (async function() {
+        try {
+          helloWorld = await getHelloWorldModule();
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      })();
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('#add-form');
+
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+
+          const form = new FormData(event.currentTarget);
+          const one = parseInt(form.get('number-one'), 10);
+          const two = parseInt(form.get('number-two'), 10);
+          const sum = helloWorld.add(one, two);
+
+          document.querySelector("#output").textContent = `Result: ${one} + ${two} = ${sum}`;
+        });
+      });
+    </script>
   </head>
+
   <body>
     <h1>WASM Hello World</h1>
+    <form id="add-form">
+      <label id="number-one"></label>
+      <input name="number-one" type="number" required/>
+      <label id="number-two"></label>
+      <input name="number-two" type="number" required/>
+      <button type="submit">Add</button>
+    </form>
     <p id="output"></p>
   </body>
+
 </html>
