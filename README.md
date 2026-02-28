@@ -12,13 +12,13 @@ Web Assembly ["Hello World" example](https://wasmbyexample.dev/examples/hello-wo
 
 ## Commands
 
-To generate the library, run
+To generate the library, run:
 
 ```sh
 $ wasm-pack build --target web
 ```
 
-To run the dev server (after having generated the library), run
+To run the dev server (after having generated the library), run:
 
 ```sh
 $ npm start
