@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2020", // needs to be at least >= es2015 for `class` support
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "strict": true,
+    "noEmit": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
+    "skipLibCheck": true
+  },
+
+  "exclude": ["./public/", "./greenwood/", "node_modules", "./target"],
+}

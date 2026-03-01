@@ -12,9 +12,11 @@
     "copy": "cp -r ./pkg ./src/public",
     "dev": "npm run copy && greenwood develop",
     "build": "npm run copy && greenwood build",
-    "serve": "greenwood serve"
+    "serve": "greenwood serve",
+    "check": "tsc"
   },
   "devDependencies": {
-    "@greenwood/cli": "^0.34.0-alpha.4"
+    "@greenwood/cli": "^0.34.0-alpha.4",
+    "typescript": "^5.9.3"
   }
 }

@@ -6,7 +6,6 @@
  */
 import fs from "node:fs/promises";
 import type { Compilation, ResourcePlugin, Resource, Config, RollupPlugin } from "@greenwood/cli";
-import type { Plugin } from 'rollup';
 
 class StandardWasmResource implements Resource {
   compilation: Compilation;
@@ -20,14 +19,10 @@ class StandardWasmResource implements Resource {
   }
 
   async shouldServe(url: URL, request: Request) {
-    console.log('should serve', { url, env: process.env.__GWD_COMMAND__, headers: request.headers  });
-    return url.protocol === "file:"
-      && this.extensions.includes(url.pathname.split(".").pop() ?? '')
-      // && (process.env.__GWD_COMMAND__ === 'build' && !request.headers.get('Accept')?.includes('text/javascript'));
+    return url.protocol === "file:" && this.extensions.includes(url.pathname.split(".").pop() ?? '');
   }
 
   async serve(url: URL) {
-    console.log('SERVE!!!!', { url });
     const body = await fs.readFile(url);
 
     return new Response(body, {
@@ -38,26 +33,13 @@ class StandardWasmResource implements Resource {
   }
 }
 
-function externalismWasmRollupPlugin(): Plugin {
-  return {
-    name: "greenwood-resource-loader",
-    async resolveId(id) {
-      if (id.endsWith(".wasm")) {
-        return {
-          id,
-          external: true,
-        };
-      }
-    },
-  }
-}
-
 const greenwoodPluginStandardWasm = function(): [ResourcePlugin, RollupPlugin] {
   return [
     {
       type: "resource",
       name: "plugin-standard-wasm:resource",
       provider: (compilation) => new StandardWasmResource(compilation),
+      // @ts-expect-error
       isGreenwoodDefaultPlugin: true,
       isStandardStaticResource: true,
     }, {
