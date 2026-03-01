@@ -3,10 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <title>WASM Hello World - Rust</title>
-    <script type="module">
+    <script type="module" src="./index.js"></script>
+
+    <!-- TODO: bundling seems to get funny within inline script tags -->
+    <!-- <script type="module">
       import { getHelloWorldModule } from './index.js';
       let helloWorld;
 
+      console.log({ getHelloWorldModule });
       (async function() {
         try {
           helloWorld = await getHelloWorldModule();
@@ -29,7 +33,7 @@
           document.querySelector("#output").textContent = `Result: ${one} + ${two} = ${sum}`;
         });
       });
-    </script>
+    </script> -->
   </head>
 
   <body>
