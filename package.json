@@ -3,14 +3,18 @@
   "version": "1.0.0",
   "description": "Web Assembly 'Hello World' example.",
   "author": "Owen Buckley <owen@thegreenhouse.io>",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/thescientist13/wasm-hello-world.git"
   },
   "scripts": {
-    "start": "live-server"
+    "copy": "cp -r ./pkg ./src/public",
+    "dev": "npm run copy && greenwood develop",
+    "build": "npm run copy && greenwood build",
+    "serve": "greenwood serve"
   },
-  "dependencies": {
-    "live-server": "^1.2.2"
+  "devDependencies": {
+    "@greenwood/cli": "^0.34.0-alpha.4"
   }
 }
