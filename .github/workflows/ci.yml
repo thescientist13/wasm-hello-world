@@ -1,0 +1,37 @@
+name: Continuous Integration
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [24]
+
+    steps:
+      - uses: actions/checkout@v6
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - name: Install WASM Pack
+        run: |
+          cargo install wasm-pack
+      - name: Cargo Init
+        run: |
+          cargo init
+      - name: Installing project dependencies
+        run: |
+          npm ci
+      - name: Check Types
+        run: |
+          npm run check
+      - name: Generate WASM
+        run: |
+          wasm-pack build --target web
+      - name: Build
+        run: |
+          npm run build
