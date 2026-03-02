@@ -1,4 +1,5 @@
 .greenwood/
+.vscode/
 node_modules/
 public/
 src/assets/

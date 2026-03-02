@@ -9,7 +9,7 @@
     "url": "git+https://github.com/thescientist13/wasm-hello-world.git"
   },
   "scripts": {
-    "copy": "cp -r ./pkg ./src/public",
+    "copy": "cp -r ./pkg ./src/assets",
     "dev": "npm run copy && greenwood develop",
     "build": "npm run copy && greenwood build",
     "serve": "greenwood serve",
