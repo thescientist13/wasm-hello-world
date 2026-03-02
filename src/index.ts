@@ -1,7 +1,7 @@
 import init from "./assets/wasm_hello_world.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const helloWorld = await init("./assets/wasm_hello_world_bg.wasm");
+  const helloWorld = await init(new URL("./assets/wasm_hello_world_bg.wasm", import.meta.url).href);
   const form = document.querySelector('#add-form') as HTMLFormElement;
   const output = document.querySelector("#output") as HTMLElement;
 
