@@ -1,0 +1,57 @@
+/*
+ *
+ * Manages web standard resource related operations for WASM.
+ * This is a Greenwood default plugin.
+ *
+ */
+import fs from "node:fs/promises";
+import type { Compilation, ResourcePlugin, Resource, Config, RollupPlugin } from "@greenwood/cli";
+
+class StandardWasmResource implements Resource {
+  compilation: Compilation;
+  extensions: string[];
+  contentType: string;
+
+  constructor(compilation: Compilation) {
+    this.compilation = compilation;
+    this.extensions = ["wasm"];
+    this.contentType = "application/wasm";
+  }
+
+  async shouldServe(url: URL, request: Request) {
+    return url.protocol === "file:" && this.extensions.includes(url.pathname.split(".").pop() ?? '');
+  }
+
+  async serve(url: URL) {
+    const body = await fs.readFile(url);
+
+    return new Response(body, {
+      headers: {
+        "Content-Type": this.contentType,
+      },
+    });
+  }
+}
+
+const greenwoodPluginStandardWasm = function(): [ResourcePlugin, RollupPlugin] {
+  return [
+    {
+      type: "resource",
+      name: "plugin-standard-wasm:resource",
+      provider: (compilation) => new StandardWasmResource(compilation),
+      // @ts-expect-error
+      isGreenwoodDefaultPlugin: true,
+      isStandardStaticResource: true,
+    }, {
+      type: "rollup",
+      name: "plugin-standard-wasm:rollup",
+      provider: () => [],
+    }
+  ];
+}
+
+export default {
+  plugins: [
+    greenwoodPluginStandardWasm()
+  ]
+} satisfies Config;

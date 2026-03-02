@@ -21,5 +21,5 @@ $ wasm-pack build --target web
 To run the dev server (after having generated the library), run:
 
 ```sh
-$ npm start
+$ npm run dev
 ```
