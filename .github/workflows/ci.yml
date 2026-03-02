@@ -26,12 +26,12 @@ jobs:
       - name: Installing project dependencies
         run: |
           npm ci
-      - name: Check Types
-        run: |
-          npm run check
       - name: Generate WASM
         run: |
           wasm-pack build --target web
       - name: Build
         run: |
           npm run build
+      - name: Check Types
+        run: |
+          npm run check
