@@ -20,9 +20,9 @@ jobs:
       - name: Install WASM Pack
         run: |
           cargo install wasm-pack
-      - name: Cargo Init
-        run: |
-          cargo init
+      # - name: Cargo Init
+      #   run: |
+      #     cargo init
       - name: Installing project dependencies
         run: |
           npm ci
